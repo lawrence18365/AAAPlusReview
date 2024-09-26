@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAAPlus Cleaning Services Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #1e3a8a;
+            --medium-blue: #3b82f6;
+            --light-blue: #bfdbfe;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            color: var(--dark-blue);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light-blue);
+        }
+        .container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo img {
+            max-width: 300px;
+            height: auto;
+        }
+        h1 {
+            color: var(--dark-blue);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--dark-blue);
+        }
+        input[type="text"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 2px solid var(--medium-blue);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+        }
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--medium-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+        button:hover {
+            background-color: var(--dark-blue);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://i.postimg.cc/ZnWYwYSJ/Clean-Nest-2-removebg-preview.png" alt="AAAPlus Cleaning Services Logo">
+        </div>
+        <h1>We Value Your Feedback</h1>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Service Received:</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a service</option>
+                    <option value="regular-cleaning">Regular Cleaning</option>
+                    <option value="deep-cleaning">Deep Cleaning</option>
+                    <option value="move-out-cleaning">Move-out Cleaning</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="issue">What went wrong with our service?</label>
+                <textarea id="issue" name="issue" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="improvement">How can we improve?</label>
+                <textarea id="improvement" name="improvement" required></textarea>
+            </div>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch('https://hook.eu2.make.com/rhksosyd3y8a2h5uhq1olj6igb5esodp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thank you for your feedback! We appreciate your input and will use it to improve our services.');
+                this.reset();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting your feedback. Please try again later or contact us directly.');
+            });
+        });
+    </script>
+</body>
+</html>
